@@ -15,7 +15,8 @@ services:
       - "80:80"
   gh-pages: 
     image: starefossen/github-pages
-    volumes: 
-      - ./../dist:/usr/src/app:delegated
+    volumes:
+    # Edit below line to point to "dist" directory of static page.
+      - ../new-app/dist:/usr/src/app:delegated
     ports: 
       - "4000:4000"
