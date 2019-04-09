@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.15-alpine
+    volumes: 
+      - ./conf:/etc/nginx/conf.d/
+      - ./nginx-selfsigned.crt:/etc/nginx/nginx-selfsigned.crt
+      - ./nginx-selfsigned.key:/etc/nginx/nginx-selfsigned.key
+      - ./dhparam.pem:/etc/nginx/dhparams.pem
+    depends_on: 
+      - gh-pages
+    ports:
+      - "443:443"
+      - "80:80"
+  gh-pages: 
+    image: starefossen/github-pages
+    volumes: 
+      - ./../dist:/usr/src/app:delegated
+    ports: 
+      - "4000:4000"
